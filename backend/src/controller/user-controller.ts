@@ -1,9 +1,22 @@
 import { AppDataSource } from "../data-source";
 import { User } from "../entity/User";
 import { Controller } from "./base-controller";
+import { GenerateId } from "../service/id-generator"
 
 export class UserContoller extends Controller{
     repository = AppDataSource.getRepository(User);
+
+    createUser = async (req, res) => {
+        const entity = this.repository.create(req.body as {});
+
+        try {
+            entity.id = GenerateId();
+            const entityInserted = await this.repository.save(entity);
+            res.json(entityInserted);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    }
 
     getAllById = async (req, res) => {
         const query = req.query.searchid || ''; // /api/usersbyid?searchid=keresoszo

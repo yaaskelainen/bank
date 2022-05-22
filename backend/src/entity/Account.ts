@@ -6,14 +6,14 @@ import { User } from "./User";
 @Entity()
 export class Account{
 
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn()
     id: string;
     
-    @Column({nullable:false})
-    userid: string ;
+    // @Column({nullable:false})
+    // usernumber: string ;
 
-    @Column({width:4, generated: "increment", type:"numeric", unique:true, default:"0000", nullable:false})
-    accountid: string ;
+    // @Column({width:4, type:"numeric", unique:true, generated:"increment", nullable:false})
+    // accountid: number ;
 
     @Column({type: "double", default:0 })
     balance: number;

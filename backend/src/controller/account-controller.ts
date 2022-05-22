@@ -1,11 +1,25 @@
 import { AppDataSource } from "../data-source";
 import { Account } from "../entity/Account";
 import { Transaction } from "../entity/Transaction";
+import { GenerateAccount } from "../service/sequence-generator";
 import { Controller } from "./base-controller";
 
 export class AccountContoller extends Controller{
     repository = AppDataSource.getRepository(Account);
 
+    createAccount = async (req, res) => {
+        const entity = this.repository.create(req.body as {});
+
+        try {
+           
+            entity.id = GenerateAccount(entity.user.id, entity.user.accounts);
+            const entityInserted = await this.repository.save(entity);
+            res.json(entityInserted);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    }
+    
     getAllByUser = async (req, res) => {
         const query = req.query.userid || ''; // /api/accountsbyuser?userid=keresoszo
 

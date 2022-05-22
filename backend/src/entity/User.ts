@@ -1,22 +1,23 @@
 import { Entity, PrimaryGeneratedColumn, PrimaryColumn, Column, Unique, OneToMany } from "typeorm"
 import { Account } from "./Account"
 
+
 @Entity()
 export class User {
 
-    @PrimaryColumn({width:6, generated: "increment", type:"numeric", unique:true})
-    id: string
+    @PrimaryColumn({unique:true})
+    id: string 
 
-    @Column()
+    @Column({nullable:false})
     name: string
 
-    @Column()
+    @Column({nullable:false})
     adress: string
 
-    @Column()
+    @Column({nullable:false})
     phone: string
 
-    @Column()
+    @Column({nullable:false})
     szig: string;
 
     @Column({default:false})
