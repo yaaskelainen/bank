@@ -7,13 +7,13 @@ import { User } from "./User";
 export class Account{
 
     @PrimaryGeneratedColumn()
-    id: string
+    id: string;
     
     @Column({nullable:false})
-    userid: string 
+    userid: string ;
 
     @Column({width:4, generated: "increment", type:"numeric", unique:true, default:"0000", nullable:false})
-    accountid: string 
+    accountid: string ;
 
     @Column({type: "double", default:0 })
     balance: number;

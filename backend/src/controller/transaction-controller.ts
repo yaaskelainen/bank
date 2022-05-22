@@ -6,7 +6,7 @@ export class TransactionContoller extends Controller{
     repository = AppDataSource.getRepository(Transaction);
 
     getAllByAccountNumber = async (req, res) => {
-        const query = req.query.account || ''; // /api/transactions?account=keresoszo
+        const query = req.query.account || ''; // /api/transactionsbyaccount?account=keresoszo
 
         try {
            const transactions = await this.repository.createQueryBuilder('transaction')
@@ -19,7 +19,7 @@ export class TransactionContoller extends Controller{
     };
 
     getAllByBalance = async (req, res) => {
-        const query = req.query.balance || ''; // /api/transactions?balance=keresoszo
+        const query = req.query.balance || ''; // /api/transactionsbybalance?balance=keresoszo
 
         try {
            const transactions = await this.repository.createQueryBuilder('transaction')
@@ -32,7 +32,7 @@ export class TransactionContoller extends Controller{
     };
 
     getAllByDate = async (req, res) => {
-        const query1 = req.query.datum1 || ''; // /api/transactions?datum1=keresoszo&datum2=keresoszo
+        const query1 = req.query.datum1 || ''; // /api/transactionsbydate?datum1=keresoszo&datum2=keresoszo
         const query2 = req.query.datum2 || '';
 
         try {

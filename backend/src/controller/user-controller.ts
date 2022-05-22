@@ -6,7 +6,7 @@ export class UserContoller extends Controller{
     repository = AppDataSource.getRepository(User);
 
     getAllById = async (req, res) => {
-        const query = req.query.id || ''; // /api/users?id=keresoszo
+        const query = req.query.searchid || ''; // /api/usersbyid?searchid=keresoszo
 
         try {
            const users = await this.repository.createQueryBuilder('user')
@@ -20,7 +20,7 @@ export class UserContoller extends Controller{
     };
 
     getAllBySzig = async (req, res) => {
-        const query = req.query.szig || ''; // /api/users?szig=keresoszo
+        const query = req.query.szig || ''; // /api/usersbyszig?szig=keresoszo
 
         try {
            const users = await this.repository.createQueryBuilder('user')
@@ -34,7 +34,7 @@ export class UserContoller extends Controller{
     };
 
     getAllByName = async (req, res) => {
-        const query = req.query.name || ''; // /api/users?name=keresoszo
+        const query = req.query.name || ''; // /api/usersbyname?name=keresoszo
 
         try {
            const users = await this.repository.createQueryBuilder('user')

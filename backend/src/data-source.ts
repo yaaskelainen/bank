@@ -1,6 +1,6 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Category } from "./entity/Transaction"
+import { Transaction } from "./entity/Transaction"
 import { Account } from "./entity/Account"
 import { User } from "./entity/User"
 
@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
     database: "banking",
     synchronize: true,
     logging: true,
-    entities: [User, Account, Category],
+    entities: [User, Account, Transaction],
     migrations: [],
     subscribers: [],
 })

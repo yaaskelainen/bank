@@ -7,7 +7,7 @@ export class AccountContoller extends Controller{
     repository = AppDataSource.getRepository(Account);
 
     getAllByUser = async (req, res) => {
-        const query = req.query.user || ''; // /api/accounts?user=keresoszo
+        const query = req.query.userid || ''; // /api/accountsbyuser?userid=keresoszo
 
         try {
            const accounts = await this.repository.createQueryBuilder('account')

@@ -17,7 +17,7 @@ export class Transaction {
     @Column({nullable: true})
     description: string;
 
-    @Column()
+    @Column({nullable:false})
     date:Date;
 
     @Column({nullable: true})
