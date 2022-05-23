@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
-import { ProductListComponent } from './product-list/product-list.component';
+import { UserListComponent } from './product-list/product-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProductListComponent
+    component: UserListComponent;
   },
   {
     path: 'product-form',

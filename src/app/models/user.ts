@@ -1,7 +1,18 @@
+import { Account } from "./account";
+
 export interface User{
-    id:string;
-    firstName:string;
-    lastName:string;
-    age:number;
-    email:String;
+    
+    id: string 
+  
+    name: string
+
+    adress: string
+    
+    phone: string
+    
+    szig: string;
+   
+    deleted: boolean;              
+   
+    accounts: Account[];
 }

@@ -18,12 +18,12 @@ export class TransactionContoller extends Controller{
         }
     };
 
-    getAllByBalance = async (req, res) => {
-        const query = req.query.balance || ''; // /api/transactionsbybalance?balance=keresoszo
+    getAllByAmount = async (req, res) => {
+        const query = req.query.amount || ''; // /api/transactionsbybalance?amount=keresoszo
 
         try {
            const transactions = await this.repository.createQueryBuilder('transaction')
-                .where("transaction.balance=:param", { param: query })
+                .where("transaction.amount=:param", { param: query })
                 .getMany();
             res.json(transactions);
         } catch (err) {
@@ -37,7 +37,7 @@ export class TransactionContoller extends Controller{
 
         try {
            const transactions = await this.repository.createQueryBuilder('transaction')
-                .where("transaction.date BETWEEN :param1 AND :param2", { param1: query1, param2: query2 })
+                .where("transaction.date BETWEEN :param1 AND :param2", { param1: Date.parse(query1), param2: Date.parse(query2) })
                 .getMany();
             res.json(transactions);
         } catch (err) {

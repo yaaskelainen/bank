@@ -29,7 +29,7 @@ export function getRouter(){
     router.get('/transactions', transactionController.getAll);
     router.get('/transactions/:id', transactionController.getOne);
     router.get('/transactionsbyaccount', transactionController.getAllByAccountNumber);
-    router.get('/transactionsbybalance', transactionController.getAllByBalance);
+    router.get('/transactionsbyamount', transactionController.getAllByAmount);
     router.get('/transactionsbydate', transactionController.getAllByDate);
     router.post('/transactions', transactionController.create);
     router.delete('/transactions/:id', transactionController.delete);

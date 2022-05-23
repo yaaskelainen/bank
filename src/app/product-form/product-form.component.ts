@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Category } from '../models/category';
+import { Category } from '../models/transaction';
 import { User } from '../models/user';
 import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
