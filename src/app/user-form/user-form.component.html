@@ -2,6 +2,7 @@
 
     <div class="row">
         <div class="col-md-6">
+            <h2>Új felhasználó:</h2>
             <form [formGroup]="userForm">
 
                 <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
@@ -10,24 +11,76 @@
 
                 <div class="alert alert-success" role="alert" *ngIf="successMsg">
                     {{successMsg}}
-                 </div>
+                </div>
 
-                <label for="id">ID</label>
-                <input type="text" class="form-control" id="id" formControlName="id">
+                <label for="name">Név:</label>
+                <input type="text" class="form-control" id="name" formControlName="name">
 
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                <label for="adress">Cím:</label>
+                <input type="text" class="form-control" id="adress" formControlName="adress">
 
-                <label for="lastName">Last ame</label>
-                <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                <label for="phone">Telefonszám:</label>
+                <input type="text" class="form-control" id="phone" formControlName="phone">
 
-                <label for="age">Age</label>
-                <input type="number" class="form-control" id="age" formControlName="age">
+                <label for="szig">Személyi igazolvány szám:</label>
+                <input type="text" class="form-control" id="szig" formControlName="szig">
 
                
 
                 <button class="btn btn-primary mt-2" (click)="addUser()"
                     [disabled]="userForm.invalid">Hozzáadás</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Felhasználó módosítás:</h2>
+
+            <h5>Felhasználók</h5>
+                <ul class="heroes">
+                    <li *ngFor="let user of users">
+                        <span class="name">{{user.id}}</span>
+                        <span class="name">{{user.name}}</span>
+                        <span class="name">{{user.adress}}</span>
+                        <span class="name">{{user.phone}}</span>
+                        <span class="name">{{user.szig}}</span>
+                        <span class="name"  *ngIf="user.deleted">Törölt!</span>
+                        <button class="selectforchange" type="button" (click)="onSelect(user)">Kijelöl</button>
+                        
+                        <button class="btn btn-primary" (click)="delete(user.id)">Töröl</button>
+                    </li>
+                </ul>
+
+
+            <form [formGroup]="userForm" *ngIf="selectedUser">
+
+                <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
+                   {{errorMsg}}
+                </div>
+
+                <div class="alert alert-success" role="alert" *ngIf="successMsg">
+                    {{successMsg}}
+                </div>
+                
+                <div>Ügyfél Id: {{selectedUser.id}}</div>
+
+                <label for="name">Módosított Név:</label>
+                <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{selectedUser.name}}" >
+
+                <label for="adress">Módosított Cím:</label>
+                <input type="text" class="form-control" id="adress" formControlName="adress" placeholder="{{selectedUser.adress}}">
+
+                <label for="phone">Módosított Telefonszám:</label>
+                <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="{{selectedUser.phone}}">
+
+                <label for="szig">Módosított Személyi igazolvány szám:</label>
+                <input type="text" class="form-control" id="szig" formControlName="szig" placeholder="{{selectedUser.szig}}">
+
+               
+
+                <button class="btn btn-primary mt-2" (click)="changeUser()"
+                    >Módosítás</button>
             </form>
         </div>
     </div>

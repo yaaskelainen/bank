@@ -11,7 +11,7 @@ export function getRouter(){
     const transactionController = new TransactionContoller();
 
     router.get('/users', userController.getAll);
-    router.get('/users/:id', userController.getOne);
+    router.get('/users/:id', userController.getOneById);
     router.get('/usersbyid', userController.getAllById);
     router.get('/usersbyszig', userController.getAllBySzig);
     router.get('/usersbyname', userController.getAllByName);

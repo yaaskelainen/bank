@@ -25,8 +25,9 @@ export class AccountContoller extends Controller{
 
         try {
            const accounts = await this.repository.createQueryBuilder('account')
-                .where("account.userid LIKE CONCAT('%', :param ,'%')", { param: query })
+                .where("account.user LIKE CONCAT('%', :param ,'%')", { param: query })
                 .leftJoinAndSelect('account.transactions','transactions')
+        
                 .getMany();
             res.json(accounts);
         } catch (err) {

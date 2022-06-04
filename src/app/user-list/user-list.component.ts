@@ -10,7 +10,9 @@ import { UserService } from '../services/user.service';
 export class UserListComponent implements OnInit {
 
   users!: User[];
-  searchQuery!: string;
+  searchId!: string;
+  searchName!: string;
+  searchSzig!: string;
 
   constructor(private userService: UserService) { }
 
@@ -18,8 +20,20 @@ export class UserListComponent implements OnInit {
     this.users = await this.userService.getUsers();
   }
 
-  async search() {
-    this.users = await this.userService.filterUsers(this.searchQuery);
+  async getById() {
+    this.users[0] = await this.userService.getUserById(this.searchId);
+  }
+
+  async searchBySzig() {
+    this.users = await this.userService.filterUsersBySzig(this.searchSzig);
+  }
+
+  async searchById() {
+    this.users = await this.userService.filterUsersById(this.searchId);
+  }
+
+  async searchByName() {
+    this.users = await this.userService.filterUsersByName(this.searchName);
   }
 
 }

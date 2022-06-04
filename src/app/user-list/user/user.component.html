@@ -1,0 +1,36 @@
+<div class="row">
+    
+    <div class="col-md-9" *ngIf="!isSelected">
+        <h5>{{user.id}}
+            <span class="badge badge-success" style="background-color: green;">{{user.name}}</span>
+            <span class="badge badge-success" style="background-color: green;">{{user.adress}}</span>
+            <span class="badge badge-success" style="background-color: green;">{{user.phone}}</span>
+            <span class="badge badge-success" style="background-color: green;">{{user.szig}}</span>
+            <span class="badge badge-success" style="background-color: green;" *ngIf="user.deleted">Törölt!</span>
+            <button class="btn btn-primary" (click)="select(user.id)">Számlák</button>
+            <button class="btn btn-primary" (click)="delete(user.id)">Töröl</button>
+           
+        </h5>
+    </div>
+
+    <div class="col-md-9" *ngIf="isSelected && selectUser">
+        <h5>{{selectUser.id}}
+            <span class="badge badge-success" style="background-color: green;">{{selectUser.name}}</span>
+            <span class="badge badge-success" style="background-color: green;">{{selectUser.adress}}</span>
+            <span class="badge badge-success" style="background-color: green;">{{selectUser.phone}}</span>
+            <span class="badge badge-success" style="background-color: green;">{{selectUser.szig}}</span>
+            <span class="badge badge-success" style="background-color: green;" *ngIf="selectUser.deleted">Törölt!</span>
+            <button class="btn btn-primary" (click)="select(user.id)">Számlákat bezár</button>
+            <button class="btn btn-primary" (click)="delete(selectUser.id)">Töröl</button>
+            <div *ngIf="selectUser.accounts">
+                <span class="badge badge-success" style="background-color: blue;" *ngFor="let account of selectUser.accounts">Számla: {{account.id}} Egyenleg: {{account.balance}} Forint</span>
+            </div>
+            <app-newaccount-form [user]="selectUser"></app-newaccount-form>
+            
+        </h5>
+    </div>
+        
+
+        
+    
+</div>

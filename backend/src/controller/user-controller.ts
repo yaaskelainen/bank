@@ -32,6 +32,20 @@ export class UserContoller extends Controller{
         }
     };
 
+    getOneById = async (req, res) => {
+        const entityId = req.params.id;
+
+        try {
+            const user = await this.repository.createQueryBuilder('user')
+                 .where("user.id = :param ", { param: entityId })
+                 .leftJoinAndSelect('user.accounts','accounts')
+                 .getOne();
+             res.json(user);
+         } catch (err) {
+             res.status(500).json({ message: err.message });
+         }
+    }
+
     getAllBySzig = async (req, res) => {
         const query = req.query.szig || ''; // /api/usersbyszig?szig=keresoszo
 

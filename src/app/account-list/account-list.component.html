@@ -1,0 +1,27 @@
+<div class="row mt-2">
+    <div class="col-md-7">
+        <input class="form-control" [(ngModel)]="searchUser" type="text" placeholder="Ügyfél szám">
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" (click)="searchByUser()">Keresés</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h5>Számlák</h5>
+
+        <div class="row">
+            <div class="col-md-12" *ngFor="let account of accounts">
+                <!-- <app-product [product]="product"></app-product> -->
+                <span>Számlaszám: {{account.id}} </span>
+                <span>Egyenleg: {{account.balance}} Forint </span>
+                <span *ngIf="account.user">Ügyfél: {{account.user.name}} </span>
+                <span *ngIf="account.deleted">Zárolva!</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        
+    </div>
+</div>
