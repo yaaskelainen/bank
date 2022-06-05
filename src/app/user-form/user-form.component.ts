@@ -22,9 +22,11 @@ export class UserFormComponent implements OnInit {
 
   successMsg: string = '';
   errorMsg: string = '';
-  @Input()
-  users: User[] = [];
+  users!: User[];
   selectedUser?: User;
+  searchId!: string;
+  searchName!: string;
+  searchSzig!: string;
   
 
   constructor(private userService: UserService,
@@ -66,6 +68,9 @@ export class UserFormComponent implements OnInit {
     if(user.szig==''){
       user.szig=this.selectedUser?.szig;
     }
+    if(user.adress==''){
+      user.adress=this.selectedUser?.adress;
+    }
     if(user.deleted==null){
       user.deleted=this.selectedUser?.deleted;
     }
@@ -84,5 +89,16 @@ export class UserFormComponent implements OnInit {
     this.ngOnInit();
   }
 
+  async searchBySzig() {
+    this.users = await this.userService.filterUsersBySzig(this.searchSzig);
+  }
+
+  async searchById() {
+    this.users = await this.userService.filterUsersById(this.searchId);
+  }
+
+  async searchByName() {
+    this.users = await this.userService.filterUsersByName(this.searchName);
+  }
   
 }

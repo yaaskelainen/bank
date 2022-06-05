@@ -8,8 +8,8 @@ export class Transaction {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column({nullable: false})
-    accountnr: string;
+    @Column({nullable: true})
+    goalaccountnr: string;
 
     @Column({type: "double", nullable: false})
     amount: number;
@@ -19,9 +19,6 @@ export class Transaction {
 
     @Column({nullable:false})
     date:Date;
-
-    @Column({nullable: true})
-    senderaccount: string;
 
     @ManyToOne(type => Account, account => account.transactions, {
         eager: true,

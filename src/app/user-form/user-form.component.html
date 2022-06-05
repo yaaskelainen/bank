@@ -1,8 +1,28 @@
 <div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-md-7">
+            <input class="form-control" [(ngModel)]="searchId" type="text" placeholder="Ügyfél azonosító">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="searchById()">Keresés</button>
+        </div>
+        <div class="col-md-7">
+            <input class="form-control" [(ngModel)]="searchName" type="text" placeholder="Név">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="searchByName()">Keresés</button>
+        </div>
+        <div class="col-md-7">
+            <input class="form-control" [(ngModel)]="searchSzig" type="text" placeholder="Személyi igazolvány száma">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="searchBySzig()">Keresés</button>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-6">
-            <h2>Új felhasználó:</h2>
+            <h2>Új ügyfél:</h2>
             <form [formGroup]="userForm">
 
                 <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
@@ -35,25 +55,25 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h2>Felhasználó módosítás:</h2>
+            <h2>Ügyfél módosítás:</h2>
 
-            <h5>Felhasználók</h5>
+            <h5>Ügyfelek</h5>
                 <ul class="heroes">
                     <li *ngFor="let user of users">
-                        <span class="name">{{user.id}}</span>
-                        <span class="name">{{user.name}}</span>
-                        <span class="name">{{user.adress}}</span>
-                        <span class="name">{{user.phone}}</span>
-                        <span class="name">{{user.szig}}</span>
+                        <span class="name">{{user.id}} </span>
+                        <span class="name">{{user.name}} </span>
+                        <span class="name">{{user.adress}} </span>
+                        <span class="name">{{user.phone}} </span>
+                        <span class="name">{{user.szig}} </span>
                         <span class="name"  *ngIf="user.deleted">Törölt!</span>
-                        <button class="selectforchange" type="button" (click)="onSelect(user)">Kijelöl</button>
+                        <button *ngIf="!user.deleted"class="selectforchange" type="button" (click)="onSelect(user)">Kijelöl</button>
                         
                         <button class="btn btn-primary" (click)="delete(user.id)">Töröl</button>
                     </li>
                 </ul>
 
 
-            <form [formGroup]="userForm" *ngIf="selectedUser">
+            <form [formGroup]="userForm" *ngIf="selectedUser && !selectedUser.deleted">
 
                 <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
                    {{errorMsg}}

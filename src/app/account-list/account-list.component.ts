@@ -16,12 +16,19 @@ export class AccountListComponent implements OnInit {
   tempArray!:Account[];
   searchId!: string;
   searchUser!: string;
+  searchUserId!: string;
+  searchName!: string;
+  searchSzig!: string;
+  selectedUser!: User;
+  selectedAccount?: Account;
+  selectionOkay:boolean=false;
                
 
   constructor(private accountService: AccountService, private userService:UserService) { }
 
   async ngOnInit(): Promise<void> {
     this.accounts = await this.accountService.getAccounts();
+    this.users = await this.userService.getUsers();
   }
 
   async getById() {
@@ -32,6 +39,30 @@ export class AccountListComponent implements OnInit {
     this.accounts = await this.accountService.filterAccountsByUser(this.searchUser);
     console.log(this.accounts);
  }
+
+ async searchBySzig() {
+  this.users = await this.userService.filterUsersBySzig(this.searchSzig);
+}
+
+async searchById() {
+  this.users = await this.userService.filterUsersById(this.searchUserId);
+}
+
+async searchByName() {
+  this.users = await this.userService.filterUsersByName(this.searchName);
+}
+
+async onSelect(user: User): Promise<void> {
+  this.selectedUser = user;
+  this.accounts = await this.accountService.filterAccountsByUser(this.selectedUser.id);
+  this.selectionOkay = false;
   
+}
+  
+async onSelectAccount(account: Account): Promise<void> {
+  this.selectedAccount = account;
+  this.selectionOkay=true;
+
+}
 
 }

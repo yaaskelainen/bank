@@ -23,7 +23,7 @@
             <button class="btn btn-primary" (click)="select(user.id)">Számlákat bezár</button>
             <button class="btn btn-primary" (click)="delete(selectUser.id)">Töröl</button>
             <div *ngIf="selectUser.accounts">
-                <span class="badge badge-success" style="background-color: blue;" *ngFor="let account of selectUser.accounts">Számla: {{account.id}} Egyenleg: {{account.balance}} Forint</span>
+                <span class="badge badge-success" style="background-color: blue;" *ngFor="let account of selectUser.accounts">Számlaszám: {{account.id}} Egyenleg: {{account.balance}} Forint</span>
             </div>
             <app-newaccount-form [user]="selectUser"></app-newaccount-form>
             

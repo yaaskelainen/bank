@@ -12,6 +12,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserComponent } from './user-list/user/user.component';
 import { AccountListComponent } from './account-list/account-list.component';
 import { NewaccountFormComponent } from './user-list/user/newaccount-form/newaccount-form.component';
+import { AccountbalanceFormComponent } from './account-list/accountbalance-form/accountbalance-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NewaccountFormComponent } from './user-list/user/newaccount-form/newacc
     UserListComponent,
     UserComponent,
     AccountListComponent,
-    NewaccountFormComponent
+    NewaccountFormComponent,
+    AccountbalanceFormComponent
   ],
   imports: [
     BrowserModule,

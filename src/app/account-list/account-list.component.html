@@ -1,11 +1,52 @@
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-md-7">
+            <input class="form-control" [(ngModel)]="searchId" type="text" placeholder="Ügyfél azonosító">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="searchById()">Keresés</button>
+        </div>
+        <div class="col-md-7">
+            <input class="form-control" [(ngModel)]="searchName" type="text" placeholder="Név">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="searchByName()">Keresés</button>
+        </div>
+        <div class="col-md-7">
+            <input class="form-control" [(ngModel)]="searchSzig" type="text" placeholder="Személyi igazolvány száma">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="searchBySzig()">Keresés</button>
+        </div>
+    </div>
+
+    <h5>Ügyfelek</h5>
+<ul class="heroes">
+    <div *ngFor="let user of users" >
+        <div *ngIf="!user.deleted">
+
+        <span class="name">{{user.id}} </span>
+        <span class="name">{{user.name}} </span>
+        <span class="name">{{user.adress}} </span>
+        <span class="name">{{user.phone}} </span>
+        <span class="name">{{user.szig}} </span>
+        <span class="name"  *ngIf="user.deleted">Törölt!</span>
+        <button class="selectforchange" type="button" (click)="onSelect(user)">Kijelöl</button>
+              
+         </div>
+        
+    </div>
+</ul>
+
 <div class="row mt-2">
     <div class="col-md-7">
-        <input class="form-control" [(ngModel)]="searchUser" type="text" placeholder="Ügyfél szám">
+        <input class="form-control" [(ngModel)]="searchUser" type="text" placeholder="Ügyfél szám" >
     </div>
     <div class="col-md-2">
         <button class="btn btn-primary" (click)="searchByUser()">Keresés</button>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-md-8">
@@ -16,12 +57,16 @@
                 <!-- <app-product [product]="product"></app-product> -->
                 <span>Számlaszám: {{account.id}} </span>
                 <span>Egyenleg: {{account.balance}} Forint </span>
-                <span *ngIf="account.user">Ügyfél: {{account.user.name}} </span>
+                <span *ngIf="!selectedUser">Ügyfél: {{account.user.name}}  </span>
+                <span *ngIf="!selectedUser">Ügyfélszám: {{account.user.id}}  </span>
+                <span *ngIf="selectedUser">Ügyfél: {{selectedUser.name}}  </span>
+                <span *ngIf="selectedUser">Ügyfélszám: {{selectedUser.id}}  </span>
                 <span *ngIf="account.deleted">Zárolva!</span>
+                <button *ngIf="!account.deleted" class="selectforchange" type="button" (click)="onSelectAccount(account)">Kijelöl</button>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        
+        <app-accountbalance-form *ngIf="selectedAccount && selectionOkay" [account]="selectedAccount"></app-accountbalance-form>
     </div>
 </div>
