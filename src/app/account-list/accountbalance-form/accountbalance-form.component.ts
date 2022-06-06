@@ -64,7 +64,7 @@ export class AccountbalanceFormComponent implements OnInit {
       await this.transactionService.createTransaction(transaction);
       this.successMsg = 'Sikeres befizetés összege: ' + amount + " Ft \n Egyenlege: " + changedAccount.balance +" Ft";
       this.accountForm.reset();
-      this.ngOnInit();
+      
     } catch (err: any) {
       this.errorMsg = err.error.message
     }
@@ -99,7 +99,7 @@ export class AccountbalanceFormComponent implements OnInit {
       this.successMsg = 'Sikeres kifizetés összege: ' + amount + " Ft \n Egyenlege: " + changedAccount.balance +" Ft";
       this.errorMsg='';
       this.accountForm.reset();
-      this.ngOnInit();
+      
     } catch (err: any) {
       this.errorMsg = err.error.message
     }
@@ -139,7 +139,7 @@ export class AccountbalanceFormComponent implements OnInit {
       await this.transactionService.createTransaction(transaction);
       this.successMsg ='Számla zárolva, kifizetés összege: ' + amount + " Ft";
     
-      this.ngOnInit();
+      
     } catch (err: any) {
       this.errorMsg = err.error.message
     }
