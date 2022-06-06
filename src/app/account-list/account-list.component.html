@@ -32,7 +32,7 @@
         <span class="name">{{user.szig}} </span>
         <span class="name"  *ngIf="user.deleted">Törölt!</span>
         <button class="selectforchange" type="button" (click)="onSelect(user)">Kijelöl</button>
-        <app-newaccount-form *ngIf="selectedUser && !user.deleted && isSameUser(user,selectedUser)" [user]="selectedUser"></app-newaccount-form>
+              
          </div>
         
     </div>

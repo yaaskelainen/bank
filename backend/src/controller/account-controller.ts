@@ -35,6 +35,8 @@ export class AccountContoller extends Controller{
         }
     };
 
+    
+
     deleteAccount = async (req, res) => {
         try {
             const entityId = req.params.id;

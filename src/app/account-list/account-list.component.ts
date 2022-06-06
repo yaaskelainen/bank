@@ -65,12 +65,4 @@ async onSelectAccount(account: Account): Promise<void> {
 
 }
 
-isSameUser(firstUser:User, secondUser:User):boolean{
-  if(firstUser.id==secondUser.id){
-    return true;
-  } else{
-    return false;
-  }
-}
-
 }
