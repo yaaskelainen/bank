@@ -54,7 +54,7 @@
 
         <div class="row">
             <div class="col-md-12" *ngFor="let account of accounts">
-                <!-- <app-product [product]="product"></app-product> -->
+                
                 <span>Számlaszám: {{account.id}} </span>
                 <span>Egyenleg: {{account.balance}} Forint </span>
                 <span *ngIf="!selectedUser">Ügyfél: {{account.user.name}}  </span>
@@ -63,10 +63,14 @@
                 <span *ngIf="selectedUser">Ügyfélszám: {{selectedUser.id}}  </span>
                 <span *ngIf="account.deleted">Zárolva!</span>
                 <button *ngIf="!account.deleted" class="selectforchange" type="button" (click)="onSelectAccount(account)">Kijelöl</button>
+                <button *ngIf="!account.deleted && selectedAccount && account.id!=selectedAccount.id " class="selectforchange" type="button" (click)="onSelectTargetAccount(account)">Kedvezményezett</button>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <app-accountbalance-form *ngIf="selectedAccount && selectionOkay" [account]="selectedAccount"></app-accountbalance-form>
+        <h3 *ngIf="selectedAccount && !selectedTargetAccount">Utalással terhelendő számla: {{selectedAccount.id}} . Átutaláshoz válasszon kedvezményezett számlát!</h3>
+        <app-accounttransfer-form *ngIf="selectedAccount  && selectedTargetAccount" [homeAccount]="selectedAccount" [targetAccount]="selectedTargetAccount"></app-accounttransfer-form>
+        
     </div>
 </div>

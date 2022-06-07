@@ -13,7 +13,7 @@ export class AccountListComponent implements OnInit {
 
   accounts!: Account[];
   users!:User[];
-  tempArray!:Account[];
+  // tempArray!:Account[];
   searchId!: string;
   searchUser!: string;
   searchUserId!: string;
@@ -22,6 +22,7 @@ export class AccountListComponent implements OnInit {
   selectedUser!: User;
   selectedAccount?: Account;
   selectionOkay:boolean=false;
+  selectedTargetAccount?:Account;
                
 
   constructor(private accountService: AccountService, private userService:UserService) { }
@@ -59,10 +60,19 @@ async onSelect(user: User): Promise<void> {
   
 }
   
-async onSelectAccount(account: Account): Promise<void> {
+ onSelectAccount(account: Account): void {
   this.selectedAccount = account;
   this.selectionOkay=true;
 
+}
+
+onSelectTargetAccount(account: Account): void {
+  this.selectedTargetAccount = account;
+   
+}
+
+onClose():void{
+  this.ngOnInit();
 }
 
 }
