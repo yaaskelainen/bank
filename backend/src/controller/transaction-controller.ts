@@ -9,8 +9,8 @@ export class TransactionContoller extends Controller{
         const query = req.query.account || ''; // /api/transactionsbyaccount?account=keresoszo
 
         try {
-           const transactions = await this.repository.createQueryBuilder('transaction')
-                .where("transaction.accountnr LIKE CONCAT('%', :param ,'%')", { param: query })
+           const transactions = await this.repository.createQueryBuilder('transaction').loadAllRelationIds()
+                .where("transaction.accountId LIKE CONCAT('%', :param ,'%')", { param: query })
                 .getMany();
             res.json(transactions);
         } catch (err) {
@@ -22,7 +22,7 @@ export class TransactionContoller extends Controller{
         const query = req.query.amount || ''; // /api/transactionsbybalance?amount=keresoszo
 
         try {
-           const transactions = await this.repository.createQueryBuilder('transaction')
+           const transactions = await this.repository.createQueryBuilder('transaction').loadAllRelationIds()
                 .where("transaction.amount=:param", { param: query })
                 .getMany();
             res.json(transactions);
@@ -36,8 +36,8 @@ export class TransactionContoller extends Controller{
         const query2 = req.query.datum2 || '';
 
         try {
-           const transactions = await this.repository.createQueryBuilder('transaction')
-                .where("transaction.date BETWEEN :param1 AND :param2", { param1: Date.parse(query1), param2: Date.parse(query2) })
+           const transactions = await this.repository.createQueryBuilder('transaction').loadAllRelationIds()
+                .where("transaction.date BETWEEN :param1 AND :param2", { param1: query1, param2: query2 })
                 .getMany();
             res.json(transactions);
         } catch (err) {

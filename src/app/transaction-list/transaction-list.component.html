@@ -1,0 +1,51 @@
+<div class="row mt-2">
+    <div class="col-md-7">
+        <input class="form-control" [(ngModel)]="searchAccount" type="text" placeholder="Számlaszám">
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" (click)="searchByAccount()">Keresés</button>
+    </div>
+    <div class="col-md-7">
+        <input class="form-control" [(ngModel)]="searchAmount" type="text" placeholder="Egyenlegváltozás">
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" (click)="searchByAmount()">Keresés</button>
+    </div>
+    <div class="col-md-7">
+        <input class="form-control" [(ngModel)]="searchDate1" type="date" >
+        <input class="form-control" [(ngModel)]="searchDate2" type="date" >
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" (click)="searchByDates()">Keresés</button>
+    </div>
+        
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h5>Tranzakciók</h5>
+
+        <div class="row">
+            <div class="col-md-12" *ngFor="let transaction of transactions">
+                
+                <span *ngIf="transaction.account.id" >Számlaszám: {{transaction.account.id}} </span>
+                <span *ngIf="transaction.account && !transaction.account.id" >Számlaszám: {{transaction.account}} </span>
+                <span>Egyenlegváltozás: {{transaction.amount}} Forint </span>
+                <span *ngIf="transaction.description">Megjegyzés: {{transaction.description}} </span>
+                <span *ngIf="transaction.goalaccountnr"> Küldő/Kedvezményezett: {{transaction.goalaccountnr}}  </span>
+                <span > Dátum, idő: {{transaction.date}}  </span>
+                <!-- <span *ngIf="selectedUser">Ügyfél: {{selectedUser.name}}  </span>
+                <span *ngIf="selectedUser">Ügyfélszám: {{selectedUser.id}}  </span>
+                <span *ngIf="account.deleted">Zárolva!</span>
+                <button *ngIf="!account.deleted" class="selectforchange" type="button" (click)="onSelectAccount(account)">Kijelöl</button>
+                <button *ngIf="!account.deleted && selectedAccount && account.id!=selectedAccount.id " class="selectforchange" type="button" (click)="onSelectTargetAccount(account)">Kedvezményezett</button> -->
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-md-4">
+        <app-accountbalance-form *ngIf="selectedAccount && selectionOkay" [account]="selectedAccount"></app-accountbalance-form>
+        <h3 *ngIf="selectedAccount && !selectedTargetAccount">Utalással terhelendő számla: {{selectedAccount.id}} . Átutaláshoz válasszon kedvezményezett számlát!</h3>
+        <app-accounttransfer-form *ngIf="selectedAccount  && selectedTargetAccount" [homeAccount]="selectedAccount" [targetAccount]="selectedTargetAccount"></app-accounttransfer-form>
+        
+    </div> -->
+</div>

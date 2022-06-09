@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { AccountListComponent } from './account-list/account-list.component';
+import { TransactionListComponent } from './transaction-list/transaction-list.component';
 
 const routes: Routes = [
   {
@@ -16,18 +17,15 @@ const routes: Routes = [
      path: 'account-list',
      component: AccountListComponent
    },
-  // {
-  //   path: 'product-form',
-  //   component: ProductFormComponent
-  // },
+   {
+     path: 'transaction-list',
+    component: TransactionListComponent
+   },
   {
     path: 'user-form',
     component: UserFormComponent
   },
-  // {
-  //   path: 'category-form',
-  //   component: CategoryFormComponent
-  // }
+ 
 ];
 
 @NgModule({
