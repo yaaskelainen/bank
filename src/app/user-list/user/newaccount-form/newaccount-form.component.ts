@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Account } from 'src/app/models/account';
@@ -19,6 +19,8 @@ export class NewaccountFormComponent implements OnInit {
   errorMsg: string = '';
   @Input()
   user!: User;
+  @Output() 
+  notifyParent: EventEmitter<boolean> = new EventEmitter();
  
   accountForm: FormGroup = this.formBuilder.group({
     id: [],
@@ -107,10 +109,16 @@ async newAccount(account:Account ):Promise<Account>{
 async newTransaction(trans:Transaction):Promise<void>{
   try {
     await this.transactionService.createTransaction(trans);
+    this.sendNotification();
  
    } catch (err: any) {
      this.errorMsg = err.error.message
    }
 }
+
+
+  sendNotification() {
+        this.notifyParent.emit(true);
+  }
   
  }

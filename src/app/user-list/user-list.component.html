@@ -5,19 +5,26 @@
     <div class="col-md-2">
         <button class="btn btn-primary" (click)="searchById()">Keresés</button>
     </div>
-    <div class="col-md-7">
-        <input class="form-control" [(ngModel)]="searchName" type="text" placeholder="Név">
-    </div>
-    <div class="col-md-2">
-        <button class="btn btn-primary" (click)="searchByName()">Keresés</button>
-    </div>
-    <div class="col-md-7">
-        <input class="form-control" [(ngModel)]="searchSzig" type="text" placeholder="Személyi igazolvány száma">
-    </div>
-    <div class="col-md-2">
-        <button class="btn btn-primary" (click)="searchBySzig()">Keresés</button>
-    </div>
 </div>
+<div class="row mt-2">
+
+<div class="col-md-7">
+    <input class="form-control" [(ngModel)]="searchName" type="text" placeholder="Név">
+</div>
+<div class="col-md-2">
+    <button class="btn btn-primary" (click)="searchByName()">Keresés</button>
+</div>
+</div>
+<div class="row mt-2">
+<div class="col-md-7">
+    <input class="form-control" [(ngModel)]="searchSzig" type="text" placeholder="Személyi igazolvány száma">
+</div>
+<div class="col-md-2">
+    <button class="btn btn-primary" (click)="searchBySzig()">Keresés</button>
+</div>
+
+</div>
+<br>
 
 <div class="row">
     <div class="col-md-8">
@@ -29,9 +36,6 @@
             </div>
         </div>
     </div>
-    <a class="nav-item nav-link" routerLink="user-form">Ügyfél hozzáadása/módosítása</a>
-    <div class="col-md-4">
-        <h5>Cart</h5>
-        <!-- <app-shopping-cart></app-shopping-cart> -->
-    </div>
+    <a class="btn btn-success" routerLink="user-form">Ügyfél hozzáadása/módosítása</a>
+
 </div>

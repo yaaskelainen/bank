@@ -1,31 +1,33 @@
 <div class="row">
     
     <div class="col-md-9" *ngIf="!isSelected">
-        <h5>{{user.id}}
-            <span class="badge badge-success" style="background-color: green;">{{user.name}}</span>
-            <span class="badge badge-success" style="background-color: green;">{{user.adress}}</span>
-            <span class="badge badge-success" style="background-color: green;">{{user.phone}}</span>
-            <span class="badge badge-success" style="background-color: green;">{{user.szig}}</span>
-            <span class="badge badge-success" style="background-color: green;" *ngIf="user.deleted">Törölt!</span>
-            <button class="btn btn-primary" (click)="select(user.id)">Számlák</button>
-            <button class="btn btn-primary" (click)="delete(user.id)">Töröl</button>
+        <h5>Ügyfélszám: {{user.id}}
+            <span class="badge badge-success" style="background-color: grey;">Név: {{user.name}}</span>
+            <span class="badge badge-success" style="background-color: grey;">Cím: {{user.adress}}</span>
+            <span class="badge badge-success" style="background-color: grey;">Telefon: {{user.phone}}</span>
+            <span class="badge badge-success" style="background-color: grey;">Sz.ig.: {{user.szig}}</span>
+            <span class="badge badge-success" style="background-color: red;" *ngIf="user.deleted">Törölt!</span>
+            <button class="btn btn-primary"  (click)="select(user.id)">Számlák</button>
+            <button class="btn btn-primary" (click)="delete(user.id)" *ngIf="!user.deleted">Töröl</button>
            
         </h5>
     </div>
 
     <div class="col-md-9" *ngIf="isSelected && selectUser">
-        <h5>{{selectUser.id}}
-            <span class="badge badge-success" style="background-color: green;">{{selectUser.name}}</span>
-            <span class="badge badge-success" style="background-color: green;">{{selectUser.adress}}</span>
-            <span class="badge badge-success" style="background-color: green;">{{selectUser.phone}}</span>
-            <span class="badge badge-success" style="background-color: green;">{{selectUser.szig}}</span>
-            <span class="badge badge-success" style="background-color: green;" *ngIf="selectUser.deleted">Törölt!</span>
+        <h5>Ügyfélszám: {{selectUser.id}}
+            <span class="badge badge-success" style="background-color: green;">Név: {{selectUser.name}}</span>
+            <span class="badge badge-success" style="background-color: green;">Cím: {{selectUser.adress}}</span>
+            <span class="badge badge-success" style="background-color: green;">Telefon: {{selectUser.phone}}</span>
+            <span class="badge badge-success" style="background-color: green;">Sz.ig.: {{selectUser.szig}}</span>
+            <span class="badge badge-success" style="background-color: red;" *ngIf="selectUser.deleted">Törölt!</span>
             <button class="btn btn-primary" (click)="select(user.id)">Számlákat bezár</button>
-            <button class="btn btn-primary" (click)="delete(selectUser.id)">Töröl</button>
+            <button class="btn btn-primary" (click)="delete(selectUser.id)" *ngIf="!selectUser.deleted">Töröl</button>
+            <h5 *ngIf="selectUser.accounts.length>0">Számlák:</h5>
+            <h5 *ngIf="selectUser.accounts.length==0" class="alert alert-warning">Nincsenek számlák!</h5>
             <div *ngIf="selectUser.accounts">
-                <span class="badge badge-success" style="background-color: blue;" *ngFor="let account of selectUser.accounts">Számlaszám: {{account.id}} Egyenleg: {{account.balance}} Forint</span>
+                <span class="badge badge-success" style="background-color: blue;" *ngFor="let account of selectUser.accounts">Számlaszám: {{account.id}} Egyenleg: {{account.balance}} Forint <span *ngIf="account.deleted" style="background-color: red;">Zárolt!</span> </span>
             </div>
-            <app-newaccount-form [user]="selectUser"></app-newaccount-form>
+            <app-newaccount-form [user]="selectUser" (notifyParent)="getNotification($event)"></app-newaccount-form>
             
         </h5>
     </div>

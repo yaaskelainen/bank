@@ -14,6 +14,7 @@ export class UserComponent implements OnInit {
   user!: User;
   selectUser?: User;
   isSelected:boolean=false;
+  shouldRefresh:boolean=false;
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -32,7 +33,14 @@ export class UserComponent implements OnInit {
 
   async delete(id:string) {
     await this.userService.deleteUser(id);
-    this.ngOnInit();
+    this.selectUser = await this.userService.getUserById(this.user.id);
+  }
+
+  async getNotification(evt: boolean) {
+    this.shouldRefresh=evt;
+    if(this.shouldRefresh){
+      this.selectUser = await this.userService.getUserById(this.user.id);
+    }
   }
 
   }

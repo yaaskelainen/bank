@@ -13,12 +13,15 @@ export class UserFormComponent implements OnInit {
 
   userForm: FormGroup = this.formBuilder.group({
     id: [],
-    name: ['', Validators.required],
-    adress: ['', Validators.required],
-    phone: ['', Validators.minLength(8)],
-    szig: ['', Validators.minLength(8)],
+    name: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-Z aáeéiíoóöőuúüűAÁEÉIÍOÓÖŐUÚÜŰ]*')]],
+    adress: ['',  [Validators.required, Validators.minLength(3)]],
+    phone: ['', Validators.pattern("[0-9]*")],
+    szig: ['', [Validators.required, Validators.minLength(8)]],
     deleted:[]
   });
+
+  
+  
 
   successMsg: string = '';
   errorMsg: string = '';
@@ -34,6 +37,7 @@ export class UserFormComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
      this.users = await this.userService.getUsers();
+     
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -48,6 +52,7 @@ export class UserFormComponent implements OnInit {
 
   async addUser() {
     const user = this.userForm.value;
+    console.log(this.userForm.invalid)
     user.deleted = false;
     try {
       const newUser = await this.userService.createUser(user);
@@ -61,19 +66,21 @@ export class UserFormComponent implements OnInit {
   async changeUser() {
     
     const user = this.userForm.value;
+    if(this.selectedUser){
     user.id = this.selectedUser?.id;
     if(user.name==''){
-      user.name=this.selectedUser?.name;
+      user.name=this.selectedUser.name;
     }
     if(user.szig==''){
-      user.szig=this.selectedUser?.szig;
+      user.szig=this.selectedUser.szig;
     }
     if(user.adress==''){
-      user.adress=this.selectedUser?.adress;
+      user.adress=this.selectedUser.adress;
     }
     if(user.deleted==null){
-      user.deleted=this.selectedUser?.deleted;
+      user.deleted=this.selectedUser.deleted;
     }
+  }
 
     try {
       const changedUser = await this.userService.updateUser(user);
@@ -101,4 +108,5 @@ export class UserFormComponent implements OnInit {
     this.users = await this.userService.filterUsersByName(this.searchName);
   }
   
+ 
 }
