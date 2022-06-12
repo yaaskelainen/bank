@@ -20,9 +20,7 @@ export class UserFormComponent implements OnInit {
     deleted:[]
   });
 
-  
-  
-
+  changedUserForm?: FormGroup ;
   successMsg: string = '';
   errorMsg: string = '';
   users!: User[];
@@ -46,12 +44,20 @@ export class UserFormComponent implements OnInit {
 
   async onSelect(user: User): Promise<void> {
     this.selectedUser = user;
+    this.changedUserForm=this.formBuilder.group({
+      id: [this.selectedUser.id],
+      name: [this.selectedUser.name, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-Z aáeéiíoóöőuúüűAÁEÉIÍOÓÖŐUÚÜŰ]*')]],
+      adress: [this.selectedUser.adress,  [Validators.required, Validators.minLength(3)]],
+      phone: [this.selectedUser.phone, Validators.pattern("[0-9]*")],
+      szig: [this.selectedUser.szig, [Validators.required, Validators.minLength(8)]],
+      deleted:[this.selectedUser.deleted]
+    })
   }
 
   
 
   async addUser() {
-    const user = this.userForm.value;
+        const user = this.userForm.value;
     console.log(this.userForm.invalid)
     user.deleted = false;
     try {
@@ -64,23 +70,16 @@ export class UserFormComponent implements OnInit {
   }
   
   async changeUser() {
+
     
-    const user = this.userForm.value;
-    if(this.selectedUser){
-    user.id = this.selectedUser?.id;
-    if(user.name==''){
-      user.name=this.selectedUser.name;
-    }
-    if(user.szig==''){
-      user.szig=this.selectedUser.szig;
-    }
-    if(user.adress==''){
-      user.adress=this.selectedUser.adress;
-    }
-    if(user.deleted==null){
-      user.deleted=this.selectedUser.deleted;
-    }
-  }
+    
+   
+    if(this.changedUserForm){
+    
+    const user = this.changedUserForm.value;
+
+    
+  
 
     try {
       const changedUser = await this.userService.updateUser(user);
@@ -89,6 +88,9 @@ export class UserFormComponent implements OnInit {
     } catch (err: any) {
       this.errorMsg = err.error.message
     }
+  }
+
+   
   }
 
   async delete(id:string) {
