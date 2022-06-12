@@ -9,20 +9,24 @@
         <div class="col-md-7">
             <input class="form-control" [(ngModel)]="searchName" type="text" placeholder="Név">
         </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="searchByName()">Keresés</button>
+        </div>
         
     </div>
+    <br>
 
     <h5>Ügyfelek</h5>
 <ul class="heroes">
-    <div *ngFor="let user of users" >
-        <div *ngIf="!user.deleted">
+    <div *ngFor="let user of users" class="user" [ngStyle]="{'background-color':selectedUser && selectedUser.id === user.id ? 'green' : 'wheat', 'color':selectedUser && selectedUser.id === user.id ? 'wheat' : 'black' }">
+        <div >
 
         <span class="name">{{user.id}} </span>
         <span class="name">{{user.name}} </span>
         <span class="name">{{user.adress}} </span>
         <span class="name">{{user.phone}} </span>
         <span class="name">{{user.szig}} </span>
-        <span class="name"  *ngIf="user.deleted">Törölt!</span>
+        <span class="name"  *ngIf="user.deleted" style="background-color: red; color: white;">Törölt!</span>
         <button class="selectforchange" type="button" (click)="onSelect(user)">Kijelöl</button>
               
          </div>
@@ -45,24 +49,28 @@
         <h5>Számlák</h5>
 
         <div class="row">
-            <div class="col-md-12" *ngFor="let account of accounts">
+            <div class="col-md-12 user" *ngFor="let account of accounts" [ngStyle]="{'background-color':selectedAccount && selectedAccount.id === account.id ? 'green' : 'wheat', 'color':selectedAccount && selectedAccount.id === account.id ? 'wheat' : 'black' }">
                 
                 <span>Számlaszám: {{account.id}} </span>
+                <div [ngStyle]="{'background-color':selectedTargetAccount && selectedTargetAccount.id === account.id ? 'brown' : 'wheat', 'color':selectedTargetAccount && selectedTargetAccount.id === account.id ? 'wheat' : 'black' }">
                 <span>Egyenleg: {{account.balance}} Forint </span>
                 <span *ngIf="!selectedUser">Ügyfél: {{account.user.name}}  </span>
                 <span *ngIf="!selectedUser">Ügyfélszám: {{account.user.id}}  </span>
                 <span *ngIf="selectedUser">Ügyfél: {{selectedUser.name}}  </span>
                 <span *ngIf="selectedUser">Ügyfélszám: {{selectedUser.id}}  </span>
-                <span *ngIf="account.deleted">Zárolva!</span>
+                </div>
+                <span *ngIf="account.deleted" style="background-color: red; color: white;">Zárolva!</span>
                 <button *ngIf="!account.deleted" class="selectforchange" type="button" (click)="onSelectAccount(account)">Kijelöl</button>
-                <button *ngIf="!account.deleted && selectedAccount && account.id!=selectedAccount.id " class="selectforchange" type="button" (click)="onSelectTargetAccount(account)">Kedvezményezett</button>
+              
+              <button *ngIf="!account.deleted && selectedAccount && account.id!=selectedAccount.id && !account.user.deleted" class="selectforchange" type="button" (click)="onSelectTargetAccount(account)">Kedvezményezett</button>
+           
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <app-accountbalance-form *ngIf="selectedAccount && selectionOkay" [account]="selectedAccount"></app-accountbalance-form>
-        <h3 *ngIf="selectedAccount && !selectedTargetAccount">Utalással terhelendő számla: {{selectedAccount.id}} . Átutaláshoz válasszon kedvezményezett számlát!</h3>
-        <app-accounttransfer-form *ngIf="selectedAccount  && selectedTargetAccount" [homeAccount]="selectedAccount" [targetAccount]="selectedTargetAccount"></app-accounttransfer-form>
+        <h3 *ngIf="selectedAccount && !selectedTargetAccount && !selectedAccount.user.deleted">Utalással terhelendő számla: {{selectedAccount.id}} . Átutaláshoz válasszon kedvezményezett számlát!</h3>
+        <app-accounttransfer-form *ngIf="selectedAccount  && selectedTargetAccount && !selectedAccount.user.deleted && !selectedTargetAccount.user.deleted" [homeAccount]="selectedAccount" [targetAccount]="selectedTargetAccount"></app-accounttransfer-form>
         
     </div>
 </div>

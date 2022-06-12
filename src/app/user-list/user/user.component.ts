@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Transaction } from 'src/app/models/transaction';
 import { User } from 'src/app/models/user';
+import { AccountService } from 'src/app/services/account.service';
+import { TransactionService } from 'src/app/services/transaction.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,8 +18,10 @@ export class UserComponent implements OnInit {
   selectUser?: User;
   isSelected:boolean=false;
   shouldRefresh:boolean=false;
+  successMsg: any;
+  errorMsg: any;
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService, private accountService: AccountService, private transactionService: TransactionService) { }
 
   ngOnInit(): void {
   }
@@ -33,6 +38,7 @@ export class UserComponent implements OnInit {
 
   async delete(id:string) {
     await this.userService.deleteUser(id);
+
     this.selectUser = await this.userService.getUserById(this.user.id);
   }
 

@@ -29,11 +29,15 @@
             <div class="col-md-12" *ngFor="let transaction of transactions">
                 
                 <span *ngIf="transaction.account.id" >Számlaszám: {{transaction.account.id}} </span>
+                
                 <span *ngIf="transaction.account && !transaction.account.id" >Számlaszám: {{transaction.account}} </span>
                 <span>Egyenlegváltozás: {{transaction.amount}} Forint </span>
                 <span *ngIf="transaction.description">Megjegyzés: {{transaction.description}} </span>
-                <span *ngIf="transaction.goalaccountnr"> Küldő/Kedvezményezett: {{transaction.goalaccountnr}}  </span>
+                <span *ngIf="transaction.goalaccountnr"> <span> {{transaction.amount>0? 'Küldő: ' : 'Kedvezményezett: '}} </span> {{transaction.goalaccountnr}}  </span>
+                
                 <span > Dátum, idő: {{transaction.date}}  </span>
+                <br>
+                <br>
                 <!-- <span *ngIf="selectedUser">Ügyfél: {{selectedUser.name}}  </span>
                 <span *ngIf="selectedUser">Ügyfélszám: {{selectedUser.id}}  </span>
                 <span *ngIf="account.deleted">Zárolva!</span>

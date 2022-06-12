@@ -2,10 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 import { Account } from 'src/app/models/account';
 import { Transaction } from 'src/app/models/transaction';
+import { User } from 'src/app/models/user';
 import { AccountService } from 'src/app/services/account.service';
 import { TransactionService } from 'src/app/services/transaction.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -30,11 +33,14 @@ export class AccountbalanceFormComponent implements OnInit {
  
   
 
-  constructor(private accountService: AccountService, private transactionService: TransactionService,
-    private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private accountService: AccountService, private transactionService: TransactionService, private userService: UserService,
+    private formBuilder: FormBuilder, private router: Router) { 
+      
+    }
 
-  ngOnInit(): void {
-     
+   ngOnInit():void {
+        console.log(this.account)
+
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -54,7 +60,7 @@ export class AccountbalanceFormComponent implements OnInit {
       amount: amount,
       description: description,
       date: new Date(),
-      account: this.account
+      account: await this.accountService.getAccountById(this.account.id)
     }
      
     try {
@@ -88,7 +94,7 @@ export class AccountbalanceFormComponent implements OnInit {
       amount: -amount,
       description: description,
       date: new Date(),
-      account: this.account
+      account: await this.accountService.getAccountById(this.account.id)
     }
      
     try {
@@ -129,7 +135,7 @@ export class AccountbalanceFormComponent implements OnInit {
       amount: -amount,
       description: description,
       date: new Date(),
-      account: this.account
+      account: await this.accountService.getAccountById(this.account.id)
     }
      
     try {

@@ -16,7 +16,7 @@ export class AccountListComponent implements OnInit {
   // tempArray!:Account[];
   searchId!: string;
   searchUser!: string;
-  searchUserId!: string;
+  
   searchName!: string;
   searchSzig!: string;
   selectedUser!: User;
@@ -46,7 +46,8 @@ export class AccountListComponent implements OnInit {
 }
 
 async searchById() {
-  this.users = await this.userService.filterUsersById(this.searchUserId);
+ 
+  this.users = await this.userService.filterUsersById(this.searchId);
 }
 
 async searchByName() {
@@ -63,6 +64,7 @@ async onSelect(user: User): Promise<void> {
  onSelectAccount(account: Account): void {
   this.selectedAccount = account;
   this.selectionOkay=true;
+  console.log(this.selectedAccount.user)
 
 }
 

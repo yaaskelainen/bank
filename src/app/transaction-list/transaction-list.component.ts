@@ -41,6 +41,7 @@ export class TransactionListComponent implements OnInit {
  }
 
  async searchByDates() {
+   console.log(this.searchDate2)
   this.transactions = await this.transactionService.filterTransactionsByDate(this.searchDate1.toString(), this.searchDate2.toString());
   
 }

@@ -14,12 +14,12 @@
     <label for="balance">Megjegyzés:</label>  
     <input type="text" class="form-control" id="description" formControlName="description" placeholder="Megjegyzés">           
 
-    <button  class="btn btn-primary mt-2" (click)="addToBalance()"
+    <button *ngIf="!account.deleted && !account.user.deleted"  class="btn btn-primary mt-2" (click)="addToBalance()"
         [disabled]="accountForm.invalid">Befizetés</button>
 
-    <button  class="btn btn-primary mt-2" (click)="deductFromBalance()"
+    <button *ngIf="!account.deleted && !account.user.deleted" class="btn btn-primary mt-2" (click)="deductFromBalance()"
         [disabled]="accountForm.invalid">Kifizetés</button>
 
-    <button  class="btn btn-primary mt-2" (click)="closeAccount()"
+    <button  *ngIf="!account.deleted" class="btn btn-primary mt-2" (click)="closeAccount()"
         >Zárol</button>
 </form>
