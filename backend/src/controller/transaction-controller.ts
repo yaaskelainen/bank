@@ -11,7 +11,7 @@ export class TransactionContoller extends Controller{
         try {
            const transactions = await this.repository.createQueryBuilder('transaction')
                 .where("transaction.accountId LIKE CONCAT('%', :param ,'%')", { param: query })
-                .leftJoinAndSelect('transaction.accountId', 'account')
+                .leftJoinAndSelect('transaction.account', 'account')
                 .getMany();
             res.json(transactions);
         } catch (err) {
@@ -25,7 +25,7 @@ export class TransactionContoller extends Controller{
         try {
            const transactions = await this.repository.createQueryBuilder('transaction')
                 .where("transaction.amount=:param", { param: query })
-                .leftJoinAndSelect('transaction.accountId', 'account')
+                .leftJoinAndSelect('transaction.account', 'account')
                 .getMany();
             res.json(transactions);
         } catch (err) {

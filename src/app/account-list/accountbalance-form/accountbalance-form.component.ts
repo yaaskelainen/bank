@@ -39,7 +39,7 @@ export class AccountbalanceFormComponent implements OnInit {
     }
 
    ngOnInit():void {
-        console.log(this.account)
+        
 
   }
 
@@ -54,23 +54,23 @@ export class AccountbalanceFormComponent implements OnInit {
     const newBalance = this.account.balance + amount;
     this.account.balance = newBalance;
 
-    const transaction: Transaction ={
-      id: '',
-      goalaccountnr: '',
-      amount: amount,
-      description: description,
-      date: new Date(),
-      account: await this.accountService.getAccountById(this.account.id)
-    }
-     
+         
     try {
      
 
       const changedAccount = await this.accountService.updateAccount(this.account);
-      await this.transactionService.createTransaction(transaction);
+      await this.transactionService.createTransaction({
+        id: '',
+        goalaccountnr: '',
+        amount: amount,
+        description: description,
+        date: new Date(),
+        account: await this.accountService.getAccountById(this.account.id)
+      });
       this.successMsg = 'Sikeres befizetés összege: ' + amount + " Ft \n Egyenlege: " + changedAccount.balance +" Ft";
       this.accountForm.reset();
-      this.ngOnInit();
+      this.account = await this.accountService.getAccountById(this.account.id);
+      
     } catch (err: any) {
       this.errorMsg = err.error.message
     }
@@ -88,24 +88,24 @@ export class AccountbalanceFormComponent implements OnInit {
     this.account.balance = newBalance;
 
 
-    const transaction: Transaction ={
-      id: '',
-      goalaccountnr: '',
-      amount: -amount,
-      description: description,
-      date: new Date(),
-      account: await this.accountService.getAccountById(this.account.id)
-    }
-     
+         
     try {
      
 
       const changedAccount = await this.accountService.updateAccount(this.account);
-      await this.transactionService.createTransaction(transaction);
+      await this.transactionService.createTransaction({
+        id: '',
+        goalaccountnr: '',
+        amount: -amount,
+        description: description,
+        date: new Date(),
+        account: await this.accountService.getAccountById(this.account.id)
+      });
       this.successMsg = 'Sikeres kifizetés összege: ' + amount + " Ft \n Egyenlege: " + changedAccount.balance +" Ft";
       this.errorMsg='';
       this.accountForm.reset();
-      this.ngOnInit();
+      this.account = await this.accountService.getAccountById(this.account.id);
+      
     } catch (err: any) {
       this.errorMsg = err.error.message
     }
@@ -129,23 +129,22 @@ export class AccountbalanceFormComponent implements OnInit {
     this.account.deleted=true;
 
 
-    const transaction: Transaction ={
-      id: '',
-      goalaccountnr: '',
-      amount: -amount,
-      description: description,
-      date: new Date(),
-      account: await this.accountService.getAccountById(this.account.id)
-    }
-     
+        
     try {
      
 
       const changedAccount = await this.accountService.updateAccount(this.account);
-      await this.transactionService.createTransaction(transaction);
+      await this.transactionService.createTransaction({
+        id: '',
+        goalaccountnr: '',
+        amount: -amount,
+        description: description,
+        date: new Date(),
+        account: await this.accountService.getAccountById(this.account.id)
+      });
       this.successMsg ='Számla zárolva, kifizetés összege: ' + amount + " Ft";
-    
-      this.ngOnInit();
+      this.account = await this.accountService.getAccountById(this.account.id);
+      
     } catch (err: any) {
       this.errorMsg = err.error.message
     }
