@@ -1,3 +1,14 @@
+Inf. rendszerek építése beadandó.
+Banki alkalmazás
+Hübner Péter
+Neptun: G1GGRE 
+
+git clone-t követően
+npm install a gyökér könyvtárban és a backend könyvtárban is.
+Adatbázisban létrehozandó a banking nevű schema.
+
+
+
 # Beadando
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.4.
